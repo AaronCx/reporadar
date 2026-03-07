@@ -1,0 +1,74 @@
+import Link from "next/link";
+import { fetchUserProfile } from "@/lib/github";
+import ProfileHeader from "@/components/ProfileHeader";
+import LanguageBreakdown from "@/components/LanguageBreakdown";
+import RepoHighlights from "@/components/RepoHighlights";
+import ActivityStats from "@/components/ActivityStats";
+import ContributionPatterns from "@/components/ContributionPatterns";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { username: string };
+}) {
+  return {
+    title: `${params.username} — RepoRadar`,
+    description: `GitHub profile analysis for ${params.username}`,
+  };
+}
+
+export default async function UserPage({
+  params,
+}: {
+  params: { username: string };
+}) {
+  let profile;
+  try {
+    profile = await fetchUserProfile(params.username);
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Something went wrong";
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 page-enter">
+        <div className="text-6xl mb-4">💀</div>
+        <h1 className="text-2xl font-bold font-mono text-[var(--accent)] mb-2">
+          {message === "User not found" ? "User Not Found" : "Error"}
+        </h1>
+        <p className="text-[var(--text-dim)] mb-6">{message}</p>
+        <Link
+          href="/"
+          className="px-6 py-3 bg-[var(--accent)] text-black font-semibold rounded-lg hover:brightness-110 transition-all"
+        >
+          Scan Another
+        </Link>
+      </div>
+    );
+  }
+
+  const { user, repos } = profile;
+
+  return (
+    <div className="max-w-5xl mx-auto px-4 py-8 page-enter space-y-8">
+      <div className="flex items-center justify-between">
+        <Link
+          href="/"
+          className="font-mono font-bold text-[var(--accent)] text-xl hover:brightness-110"
+        >
+          RepoRadar<span className="cursor-blink">_</span>
+        </Link>
+        <Link
+          href="/"
+          className="px-4 py-2 border border-[var(--accent)] text-[var(--accent)] rounded-lg hover:bg-[var(--accent)] hover:text-black transition-all text-sm font-semibold"
+        >
+          Scan Another
+        </Link>
+      </div>
+
+      <ProfileHeader user={user} />
+      <ActivityStats user={user} repos={repos} />
+      <LanguageBreakdown repos={repos} />
+      <RepoHighlights repos={repos} />
+      <ContributionPatterns repos={repos} />
+    </div>
+  );
+}

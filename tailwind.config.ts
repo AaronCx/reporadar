@@ -9,8 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        bg: "#0a0a0a",
+        accent: "#00ff88",
+        "card-bg": "#111111",
+        "card-border": "#1a1a1a",
+        "text-main": "#e0e0e0",
+        "text-dim": "#666666",
+      },
+      fontFamily: {
+        mono: ['"JetBrains Mono"', "monospace"],
+        sans: ['"Outfit"', "sans-serif"],
       },
     },
   },
