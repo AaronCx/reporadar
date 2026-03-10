@@ -7,7 +7,9 @@ import LanguageBreakdown from "@/components/LanguageBreakdown";
 import RepoHighlights from "@/components/RepoHighlights";
 import ActivityStats from "@/components/ActivityStats";
 import ContributionPatterns from "@/components/ContributionPatterns";
+import CommitHeatmap from "@/components/CommitHeatmap";
 import DateRangeFilter from "@/components/DateRangeFilter";
+import ExportButton from "@/components/ExportButton";
 
 interface UserProfileProps {
   user: GitHubUser;
@@ -51,19 +53,23 @@ export default function UserProfile({ user, repos }: UserProfileProps) {
             </span>
           )}
         </div>
-        <DateRangeFilter
-          fromDate={fromDate}
-          toDate={toDate}
-          filterField={filterField}
-          onFromDateChange={setFromDate}
-          onToDateChange={setToDate}
-          onFilterFieldChange={setFilterField}
-        />
+        <div className="flex items-center gap-3">
+          <ExportButton repos={filteredRepos} />
+          <DateRangeFilter
+            fromDate={fromDate}
+            toDate={toDate}
+            filterField={filterField}
+            onFromDateChange={setFromDate}
+            onToDateChange={setToDate}
+            onFilterFieldChange={setFilterField}
+          />
+        </div>
       </div>
 
       <ActivityStats user={user} repos={filteredRepos} />
       <LanguageBreakdown repos={filteredRepos} />
       <RepoHighlights repos={filteredRepos} />
+      <CommitHeatmap repos={filteredRepos} />
       <ContributionPatterns repos={filteredRepos} />
     </>
   );
