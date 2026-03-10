@@ -1,10 +1,6 @@
 import Link from "next/link";
 import { fetchUserProfile } from "@/lib/github";
-import ProfileHeader from "@/components/ProfileHeader";
-import LanguageBreakdown from "@/components/LanguageBreakdown";
-import RepoHighlights from "@/components/RepoHighlights";
-import ActivityStats from "@/components/ActivityStats";
-import ContributionPatterns from "@/components/ContributionPatterns";
+import UserProfile from "@/components/UserProfile";
 
 export async function generateMetadata({
   params,
@@ -64,11 +60,7 @@ export default async function UserPage({
         </Link>
       </div>
 
-      <ProfileHeader user={user} />
-      <ActivityStats user={user} repos={repos} />
-      <LanguageBreakdown repos={repos} />
-      <RepoHighlights repos={repos} />
-      <ContributionPatterns repos={repos} />
+      <UserProfile user={user} repos={repos} />
     </div>
   );
 }
