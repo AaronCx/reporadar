@@ -27,8 +27,8 @@ Scan any public GitHub profile and get an instant visual developer profile with 
 ## Getting Started
 
 ```bash
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 Open http://localhost:3000, enter a GitHub username, and scan.
@@ -60,7 +60,7 @@ lib/
 No environment variables needed. Deploy to Vercel:
 
 ```bash
-npm run build
+bun run build
 ```
 
 ## License
