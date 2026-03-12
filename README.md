@@ -20,6 +20,7 @@ Scan any public GitHub profile and get an instant visual developer profile with 
 |-------|------|
 | Framework | Next.js 14 (App Router) |
 | Language | TypeScript |
+| Runtime / Package Manager | Bun |
 | Styling | Tailwind CSS |
 | Fonts | JetBrains Mono, Outfit |
 | Data | GitHub Public API (no key required) |
