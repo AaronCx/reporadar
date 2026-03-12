@@ -8,6 +8,7 @@ import RepoHighlights from "@/components/RepoHighlights";
 import ActivityStats from "@/components/ActivityStats";
 import ContributionPatterns from "@/components/ContributionPatterns";
 import CommitHeatmap from "@/components/CommitHeatmap";
+import ContributorStats from "@/components/ContributorStats";
 import DateRangeFilter from "@/components/DateRangeFilter";
 import ExportButton from "@/components/ExportButton";
 import StarHistory from "@/components/StarHistory";
@@ -72,6 +73,7 @@ export default function UserProfile({ user, repos }: UserProfileProps) {
       <RepoHighlights repos={filteredRepos} />
       <StarHistory repos={filteredRepos} />
       <CommitHeatmap repos={filteredRepos} />
+      <ContributorStats repos={filteredRepos} />
       <ContributionPatterns repos={filteredRepos} />
     </>
   );
