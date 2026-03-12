@@ -52,12 +52,20 @@ export default async function UserPage({
         >
           RepoRadar<span className="cursor-blink">_</span>
         </Link>
-        <Link
-          href="/"
-          className="px-4 py-2 border border-[var(--accent)] text-[var(--accent)] rounded-lg hover:bg-[var(--accent)] hover:text-black transition-all text-sm font-semibold"
-        >
-          Scan Another
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/compare"
+            className="px-4 py-2 border border-[var(--card-border)] text-[var(--text-dim)] rounded-lg hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all text-sm font-semibold"
+          >
+            Compare
+          </Link>
+          <Link
+            href="/"
+            className="px-4 py-2 border border-[var(--accent)] text-[var(--accent)] rounded-lg hover:bg-[var(--accent)] hover:text-black transition-all text-sm font-semibold"
+          >
+            Scan Another
+          </Link>
+        </div>
       </div>
 
       <UserProfile user={user} repos={repos} />

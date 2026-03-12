@@ -1,3 +1,4 @@
+import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
 
 export default function Home() {
@@ -10,6 +11,12 @@ export default function Home() {
         Scan any GitHub profile
       </p>
       <SearchBar />
+      <Link
+        href="/compare"
+        className="mt-4 text-sm text-[var(--text-dim)] hover:text-[var(--accent)] transition-colors"
+      >
+        or compare two profiles &rarr;
+      </Link>
     </div>
   );
 }
