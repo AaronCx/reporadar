@@ -10,6 +10,7 @@ import ContributionPatterns from "@/components/ContributionPatterns";
 import CommitHeatmap from "@/components/CommitHeatmap";
 import DateRangeFilter from "@/components/DateRangeFilter";
 import ExportButton from "@/components/ExportButton";
+import StarHistory from "@/components/StarHistory";
 
 interface UserProfileProps {
   user: GitHubUser;
@@ -69,6 +70,7 @@ export default function UserProfile({ user, repos }: UserProfileProps) {
       <ActivityStats user={user} repos={filteredRepos} />
       <LanguageBreakdown repos={filteredRepos} />
       <RepoHighlights repos={filteredRepos} />
+      <StarHistory repos={filteredRepos} />
       <CommitHeatmap repos={filteredRepos} />
       <ContributionPatterns repos={filteredRepos} />
     </>
