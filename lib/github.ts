@@ -29,7 +29,13 @@ export interface UserProfile {
   repos: GitHubRepo[];
 }
 
+import { getCached, setCache } from "./cache";
+
 export async function fetchUserProfile(username: string): Promise<UserProfile> {
+  const cacheKey = `profile:${username.toLowerCase()}`;
+  const cached = getCached<UserProfile>(cacheKey);
+  if (cached) return cached;
+
   const [userRes, reposRes] = await Promise.all([
     fetch(`https://api.github.com/users/${encodeURIComponent(username)}`, {
       cache: "no-store",
@@ -50,7 +56,9 @@ export async function fetchUserProfile(username: string): Promise<UserProfile> {
   const user: GitHubUser = await userRes.json();
   const repos: GitHubRepo[] = reposRes.ok ? await reposRes.json() : [];
 
-  return { user, repos };
+  const profile = { user, repos };
+  setCache(cacheKey, profile);
+  return profile;
 }
 
 export function getLanguageStats(repos: GitHubRepo[]) {
