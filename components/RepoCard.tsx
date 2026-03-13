@@ -14,7 +14,7 @@ export default function RepoCard({
       href={repo.html_url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`animate-fade-in-up ${delayClass} block p-5 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl card-glow hover:no-underline`}
+      className={`animate-fade-in-up ${delayClass} block p-4 sm:p-5 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl card-glow hover:no-underline`}
     >
       <h3 className="font-mono font-bold text-[var(--accent)] truncate">
         {repo.name}

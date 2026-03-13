@@ -61,7 +61,7 @@ export default function ContributorStats({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Language distribution */}
-        <div className="p-5 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl card-glow">
+        <div className="p-4 sm:p-5 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl card-glow">
           <h3 className="text-sm font-bold font-mono text-[var(--accent)] mb-3">
             Repos by Language
           </h3>
@@ -105,7 +105,7 @@ export default function ContributorStats({
         </div>
 
         {/* Freshness breakdown */}
-        <div className="p-5 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl card-glow">
+        <div className="p-4 sm:p-5 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl card-glow">
           <h3 className="text-sm font-bold font-mono text-[var(--accent)] mb-3">
             Update Freshness
           </h3>

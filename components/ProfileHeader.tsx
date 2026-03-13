@@ -11,7 +11,7 @@ export default function ProfileHeader({ user }: { user: GitHubUser }) {
         alt={`${user.login}'s avatar`}
         width={120}
         height={120}
-        className="rounded-full border-2 border-[var(--accent)]"
+        className="rounded-full border-2 border-[var(--accent)] w-24 h-24 sm:w-[120px] sm:h-[120px]"
       />
       <div className="flex-1 text-center sm:text-left">
         <h1 className="text-2xl font-bold font-mono text-[var(--accent)]">

@@ -30,7 +30,7 @@ export default function LanguageBreakdown({ repos }: { repos: GitHubRepo[] }) {
   });
 
   return (
-    <div className="animate-fade-in-up animate-delay-2 p-6 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl card-glow">
+    <div className="animate-fade-in-up animate-delay-2 p-4 sm:p-6 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl card-glow">
       <h2 className="text-lg font-bold font-mono text-[var(--accent)] mb-4">
         Language Breakdown
       </h2>

@@ -45,23 +45,23 @@ export default async function UserPage({
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 page-enter space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <Link
           href="/"
           className="font-mono font-bold text-[var(--accent)] text-xl hover:brightness-110"
         >
           RepoRadar<span className="cursor-blink">_</span>
         </Link>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/compare"
-            className="px-4 py-2 border border-[var(--card-border)] text-[var(--text-dim)] rounded-lg hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all text-sm font-semibold"
+            className="px-3 sm:px-4 py-2 border border-[var(--card-border)] text-[var(--text-dim)] rounded-lg hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all text-sm font-semibold"
           >
             Compare
           </Link>
           <Link
             href="/"
-            className="px-4 py-2 border border-[var(--accent)] text-[var(--accent)] rounded-lg hover:bg-[var(--accent)] hover:text-black transition-all text-sm font-semibold"
+            className="px-3 sm:px-4 py-2 border border-[var(--accent)] text-[var(--accent)] rounded-lg hover:bg-[var(--accent)] hover:text-black transition-all text-sm font-semibold"
           >
             Scan Another
           </Link>
