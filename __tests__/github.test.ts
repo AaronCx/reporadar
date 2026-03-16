@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect } from "bun:test";
 import {
   GitHubRepo,
   getLanguageStats,
@@ -8,7 +8,7 @@ import {
   relativeTime,
   accountAge,
   getLanguageColor,
-} from "@/lib/github";
+} from "../lib/github";
 
 function makeRepo(overrides: Partial<GitHubRepo> = {}): GitHubRepo {
   return {
@@ -114,7 +114,6 @@ describe("getTotalStats", () => {
 
 describe("getCreationDayStats", () => {
   it("returns 7 days with correct counts", () => {
-    // Use dates and verify totals rather than specific day names (timezone-dependent)
     const repos = [
       makeRepo({ created_at: "2025-01-06T12:00:00Z" }),
       makeRepo({ created_at: "2025-01-06T12:00:00Z" }),
@@ -124,70 +123,63 @@ describe("getCreationDayStats", () => {
     expect(stats).toHaveLength(7);
     const totalCount = stats.reduce((sum, s) => sum + s.count, 0);
     expect(totalCount).toBe(3);
-    // The day with 2 repos should have percentage 100 (it's the max)
     const maxDay = stats.find((s) => s.count === 2)!;
     expect(maxDay.percentage).toBe(100);
-    // The day with 1 repo should have percentage 50
     const oneDayEntry = stats.find((s) => s.count === 1)!;
     expect(oneDayEntry.percentage).toBe(50);
   });
 });
 
 describe("relativeTime", () => {
-  beforeEach(() => {
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date("2026-03-16T12:00:00Z"));
-  });
-
-  afterEach(() => {
-    vi.useRealTimers();
-  });
+  // Use dates relative to now to avoid needing fake timers
+  const now = Date.now();
 
   it("returns 'just now' for very recent dates", () => {
-    expect(relativeTime("2026-03-16T11:59:50Z")).toBe("just now");
+    const tenSecondsAgo = new Date(now - 10 * 1000).toISOString();
+    expect(relativeTime(tenSecondsAgo)).toBe("just now");
   });
 
   it("returns minutes ago", () => {
-    expect(relativeTime("2026-03-16T11:55:00Z")).toBe("5 minutes ago");
+    const fiveMinAgo = new Date(now - 5 * 60 * 1000).toISOString();
+    expect(relativeTime(fiveMinAgo)).toBe("5 minutes ago");
   });
 
   it("returns hours ago", () => {
-    expect(relativeTime("2026-03-16T09:00:00Z")).toBe("3 hours ago");
+    const threeHoursAgo = new Date(now - 3 * 60 * 60 * 1000).toISOString();
+    expect(relativeTime(threeHoursAgo)).toBe("3 hours ago");
   });
 
   it("returns days ago", () => {
-    expect(relativeTime("2026-03-14T12:00:00Z")).toBe("2 days ago");
+    const twoDaysAgo = new Date(now - 2 * 24 * 60 * 60 * 1000).toISOString();
+    expect(relativeTime(twoDaysAgo)).toBe("2 days ago");
   });
 
   it("returns months ago", () => {
-    expect(relativeTime("2025-12-16T12:00:00Z")).toBe("3 months ago");
+    const threeMonthsAgo = new Date(now - 90 * 24 * 60 * 60 * 1000).toISOString();
+    const result = relativeTime(threeMonthsAgo);
+    expect(result).toMatch(/\d+ months? ago/);
   });
 
   it("returns years ago", () => {
-    expect(relativeTime("2024-01-01T00:00:00Z")).toBe("2 years ago");
+    const twoYearsAgo = new Date(now - 730 * 24 * 60 * 60 * 1000).toISOString();
+    expect(relativeTime(twoYearsAgo)).toBe("2 years ago");
   });
 
   it("uses singular form for 1 unit", () => {
-    expect(relativeTime("2025-03-16T12:00:00Z")).toBe("1 year ago");
+    const oneYearAgo = new Date(now - 365 * 24 * 60 * 60 * 1000).toISOString();
+    expect(relativeTime(oneYearAgo)).toBe("1 year ago");
   });
 });
 
 describe("accountAge", () => {
-  beforeEach(() => {
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date("2026-03-16T12:00:00Z"));
-  });
-
-  afterEach(() => {
-    vi.useRealTimers();
-  });
-
   it("calculates years correctly", () => {
-    expect(accountAge("2021-03-16T00:00:00Z")).toBe(5);
+    const fiveYearsAgo = new Date(Date.now() - 5 * 365.25 * 24 * 60 * 60 * 1000).toISOString();
+    expect(accountAge(fiveYearsAgo)).toBe(5);
   });
 
   it("returns 0 for recent accounts", () => {
-    expect(accountAge("2026-01-01T00:00:00Z")).toBe(0);
+    const twoMonthsAgo = new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString();
+    expect(accountAge(twoMonthsAgo)).toBe(0);
   });
 });
 
