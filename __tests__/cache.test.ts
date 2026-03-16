@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "bun:test";
+import { describe, it, expect, beforeEach } from "vitest";
 import { getCached, setCache } from "../lib/cache";
 
 // We need a fresh cache for each test — the module caches a Map
