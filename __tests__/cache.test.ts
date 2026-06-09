@@ -35,4 +35,13 @@ describe("cache", () => {
     setCache("overwrite-key", "second");
     expect(getCached("overwrite-key")).toBe("second");
   });
+
+  it("evicts the oldest entry when the max-entries cap is reached", () => {
+    setCache("cap-oldest", "first");
+    for (let i = 0; i < 500; i++) {
+      setCache(`cap-filler-${i}`, i);
+    }
+    expect(getCached("cap-oldest")).toBeNull();
+    expect(getCached("cap-filler-499")).toBe(499);
+  });
 });

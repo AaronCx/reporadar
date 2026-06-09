@@ -36,19 +36,27 @@ export async function fetchUserProfile(username: string): Promise<UserProfile> {
   const cached = getCached<UserProfile>(cacheKey);
   if (cached) return cached;
 
+  const headers: Record<string, string> = process.env.GITHUB_TOKEN
+    ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+    : {};
+
   const [userRes, reposRes] = await Promise.all([
     fetch(`https://api.github.com/users/${encodeURIComponent(username)}`, {
       cache: "no-store",
+      headers,
     }),
     fetch(
       `https://api.github.com/users/${encodeURIComponent(username)}/repos?per_page=100&sort=updated`,
-      { cache: "no-store" }
+      { cache: "no-store", headers }
     ),
   ]);
 
   if (!userRes.ok) {
     if (userRes.status === 404) {
       throw new Error("User not found");
+    }
+    if (userRes.status === 403 || userRes.status === 429) {
+      throw new Error("GitHub API rate limit exceeded, try again later");
     }
     throw new Error(`GitHub API error: ${userRes.status}`);
   }
