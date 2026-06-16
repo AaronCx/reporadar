@@ -128,9 +128,9 @@ function BarComparison({
 export default async function ComparePage({
   searchParams,
 }: {
-  searchParams: { user1?: string; user2?: string };
+  searchParams: Promise<{ user1?: string; user2?: string }>;
 }) {
-  const { user1, user2 } = searchParams;
+  const { user1, user2 } = await searchParams;
 
   const hasUsers = user1 && user2;
 
