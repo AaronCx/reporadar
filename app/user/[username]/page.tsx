@@ -5,22 +5,24 @@ import UserProfile from "@/components/UserProfile";
 export async function generateMetadata({
   params,
 }: {
-  params: { username: string };
+  params: Promise<{ username: string }>;
 }) {
+  const { username } = await params;
   return {
-    title: `${params.username} — RepoRadar`,
-    description: `GitHub profile analysis for ${params.username}`,
+    title: `${username} — RepoRadar`,
+    description: `GitHub profile analysis for ${username}`,
   };
 }
 
 export default async function UserPage({
   params,
 }: {
-  params: { username: string };
+  params: Promise<{ username: string }>;
 }) {
+  const { username } = await params;
   let profile;
   try {
-    profile = await fetchUserProfile(params.username);
+    profile = await fetchUserProfile(username);
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Something went wrong";
