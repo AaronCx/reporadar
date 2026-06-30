@@ -13,13 +13,16 @@ export default function LanguageBreakdown({ repos }: { repos: GitHubRepo[] }) {
   const strokeWidth = 28;
   const circumference = 2 * Math.PI * radius;
 
-  // Build segments
-  let cumulativeOffset = 0;
-  const segments = stats.map((s) => {
+  // Build segments. The dash offset for each segment is the negative sum of
+  // the preceding segments' lengths; derive it from the preceding percentages
+  // so nothing is mutated during render.
+  const segments = stats.map((s, i) => {
     const dashLength = (s.percentage / 100) * circumference;
     const dashGap = circumference - dashLength;
-    const offset = -cumulativeOffset;
-    cumulativeOffset += dashLength;
+    const precedingPercentage = stats
+      .slice(0, i)
+      .reduce((sum, prev) => sum + prev.percentage, 0);
+    const offset = -((precedingPercentage / 100) * circumference);
     return {
       language: s.language,
       percentage: s.percentage,
