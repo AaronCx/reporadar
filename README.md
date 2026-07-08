@@ -4,6 +4,8 @@ Scan any public GitHub profile and get an instant visual developer profile with 
 
 **[Try it live](https://reporadar-rho.vercel.app)**
 
+![A scanned profile — activity stats, top language, most-starred repo, and language breakdown](.github/assets/scan-profile.png)
+
 ## Features
 
 - **Profile Overview** — Avatar, bio, location, followers/following, account age
