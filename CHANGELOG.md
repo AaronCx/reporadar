@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.2.0] - 2026-08-19
+
+### Security
+- Cap the in-memory API cache at 500 entries with oldest-entry eviction, closing an unbounded-growth vector from the June security audit; also use an optional `GITHUB_TOKEN` for API auth, surface rate-limit errors, and ignore all `.env` files except `.env.example` (#6)
+- Add Dependabot version-update config (#7)
+- Resolve all outstanding Dependabot security alerts (#15)
+
+### Dependencies
+- Upgrade React 19, Next 16, Tailwind 4, ESLint 10, @types/node 26 (#19)
+- Bump GitHub Actions: oven-sh/setup-bun 1 → 2 (#9), actions/checkout 4 → 7 (#16)
+
+### Housekeeping
+- Add MIT license and repository metadata to package.json (#22)
+- Add a screenshot to the README (#23)
+- Add the live CI badge to the README
+- Bump the package.json `version` field 0.1.0 → 1.2.0 — it was never bumped for the 1.0.0 or 1.1.0 releases, so it now catches up with reality
+
 ## [1.1.0] - 2026-03-16
 
 ### Added

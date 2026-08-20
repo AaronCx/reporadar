@@ -1,5 +1,7 @@
 # RepoRadar
 
+[![CI](https://github.com/AaronCx/reporadar/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/AaronCx/reporadar/actions/workflows/ci.yml)
+
 Scan any public GitHub profile and get an instant visual developer profile with analytics, language breakdowns, and contribution patterns.
 
 **[Try it live](https://reporadar-rho.vercel.app)**
